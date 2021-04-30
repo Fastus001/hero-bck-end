@@ -10,7 +10,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @ExtendWith(MockitoExtension.class)
 class RaceServiceTest {
@@ -31,7 +32,6 @@ class RaceServiceTest {
                 Race.builder().id(1L).name("Dwarfs").skillNames(List.of("Skill1", "Skill2"))
                         .talentNames(List.of("Talent1","Talent2", "Talent3")).freeTalents("4").build()
         );
-
     }
 
     @Test
