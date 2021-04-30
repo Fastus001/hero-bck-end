@@ -1,10 +1,7 @@
 package pl.fastus.wfrpg.hero.domain.skill;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,4 +21,12 @@ public class SkillController {
     public Skill getBySkillName(@PathVariable String name){
         return service.findSkillByName(name);
     }
+
+    @CrossOrigin(allowedHeaders = "*", originPatterns = "*")
+    @GetMapping("/list")
+    public void getSkillListFromNames(@RequestBody List<String> names){
+        System.out.println(names);
+        //TODO - method in service layer!!!
+    }
+
 }
