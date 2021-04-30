@@ -22,7 +22,7 @@ public class Race {
     private String name;
 
     @ElementCollection
-    private List<String> professionName;
+    private List<String> skillNames;
 
     @ElementCollection
     private List<String> talentNames;
