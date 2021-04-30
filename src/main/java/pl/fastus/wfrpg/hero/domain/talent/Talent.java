@@ -1,5 +1,6 @@
-package pl.fastus.wfrpg.hero.domain;
+package pl.fastus.wfrpg.hero.domain.talent;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,6 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Entity
@@ -24,12 +27,4 @@ public class Talent {
     private String statNumber;
     private String test;
     private String description;
-
-    @Builder
-    public Talent(String name, String statNumber, String test, String description) {
-        this.name = name;
-        this.statNumber = statNumber;
-        this.test = test;
-        this.description = description;
-    }
 }
