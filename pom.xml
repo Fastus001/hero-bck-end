@@ -15,6 +15,7 @@
     <description>Backend for the hero wfrpg creator</description>
     <properties>
         <java.version>11</java.version>
+        <JUinit.version>5.7.1</JUinit.version>
     </properties>
     <dependencies>
         <dependency>
@@ -50,6 +51,18 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>${JUinit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>${JUinit.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
