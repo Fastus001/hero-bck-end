@@ -5,7 +5,10 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.util.List;
 
 @AllArgsConstructor
@@ -26,6 +29,8 @@ public class Race {
 
     @ElementCollection
     private List<String> talentNames;
-
     private String freeTalents;
+
+    @ElementCollection
+    private List<String> stats;
 }

@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+import pl.fastus.wfrpg.hero.domain.race.Race;
+import pl.fastus.wfrpg.hero.domain.race.RaceRepository;
 import pl.fastus.wfrpg.hero.domain.skill.Skill;
 import pl.fastus.wfrpg.hero.domain.skill.SkillRepository;
 import pl.fastus.wfrpg.hero.domain.talent.Talent;
@@ -22,12 +24,32 @@ public class BootLoader implements CommandLineRunner {
 
     private final SkillRepository skillRepository;
     private final TalentRepository talentRepository;
+    private final RaceRepository raceRepository;
 
     @Override
     public void run(String... args) throws Exception {
         loadSkills();
         loadTalents();
+        loadRaces();
 
+    }
+
+    private void loadRaces() throws IOException {
+        List<String> lines = Files.readAllLines(Path.of("src/main/resources/static/races.txt"));
+        lines.stream()
+                .map(this::convertToRace)
+                .forEach(raceRepository::save);
+    }
+
+    private Race convertToRace(String line) {
+        String[] split = line.split(";");
+        return Race.builder()
+                .name(split[0])
+                .skillNames(List.of(split[1].split(":")))
+                .talentNames(List.of(split[2].split(":")))
+                .freeTalents(split[3])
+                .stats(List.of(split[4].split(",")))
+                .build();
     }
 
     private void loadSkills() throws IOException {

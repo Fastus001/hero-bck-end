@@ -1,5 +1,6 @@
 package pl.fastus.wfrpg.hero.domain.profession;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,6 +15,7 @@ import java.util.List;
  * Created by Tom - 03.05.2021
  */
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder(toBuilder = true)
 @Data
 @Entity
