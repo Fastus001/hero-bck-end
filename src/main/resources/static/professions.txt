@@ -254,6 +254,3 @@ WOJOWNICY;ŻOŁNIERZ/ŻOŁNIERZ;Rekrut – Srebro 1/Rekrutka – Srebro 1;Ludzie
 WOJOWNICY;ŻOŁNIERZ/ŻOŁNIERZ;Żołnierz – Srebro 3/Żołnierz – Srebro 3;Ludzie,Leśne elfy,Wysokie elfy,Krasnoludy,Niziołki;Broń Biała (Dowolna)/Broń Zasięgowa (Dowolna)/Hazard/Mocna Głowa/Plotkowanie/Sztuka Przetrwania;Etykieta (Żołnierze)/Musztra/Szybkie Przeładowanie/Tarczownik;broń (Dowolna),hełm,napierśnik;0,1,3,8;2
 WOJOWNICY;ŻOŁNIERZ/ŻOŁNIERZ;Sierżant – Srebro 5/Sierżant – Srebro 5;Ludzie,Leśne elfy,Wysokie elfy,Krasnoludy,Niziołki;Dowodzenie/Intuicja/Leczenie/Percepcja;Niewzruszony/Walka w Ciasnocie/Wódz/Zmysł Bitewny;oddział Żołnierzy,symbol rangi;0,1,3,4,8;3
 WOJOWNICY;ŻOŁNIERZ/ŻOŁNIERZ;Oficer – Złoto 1/Oficer – Złoto 1;Ludzie,Leśne elfy,Wysokie elfy,Krasnoludy,Niziołki;Nawigacja/Wiedza (Sztuka Wojenna);Inspirujący/Mówca/Obieżyświat/Waleczne Serce;awans,lekki koń bojowy z siodłem i uprzężą,mapa,mundur dobrej jakości,oddział Żołnierzy,rozkazy,symbol rangi;0,1,3,4,8,9;4
-
-
-

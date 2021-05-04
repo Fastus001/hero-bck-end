@@ -25,9 +25,10 @@ public class Profession {
     @GeneratedValue
     private Long id;
 
+    private String career;
     private String name;
     private String path;
-    private Integer level;
+    private Boolean male;
 
     @ElementCollection
     private List<String> skillNames;
@@ -39,8 +40,10 @@ public class Profession {
     private List<String> availableForRaces;
 
     @ElementCollection
-    private List<Integer> stats;
+    private List<String> stats;
 
     @ElementCollection
     private List<String> items;
+
+    private String level;
 }

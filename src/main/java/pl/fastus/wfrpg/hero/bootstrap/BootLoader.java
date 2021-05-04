@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+import pl.fastus.wfrpg.hero.domain.profession.Profession;
+import pl.fastus.wfrpg.hero.domain.profession.ProfessionRepository;
 import pl.fastus.wfrpg.hero.domain.race.Race;
 import pl.fastus.wfrpg.hero.domain.race.RaceRepository;
 import pl.fastus.wfrpg.hero.domain.skill.Skill;
@@ -15,6 +17,7 @@ import pl.fastus.wfrpg.hero.enums.SkillType;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Collection;
 import java.util.List;
 
 @Slf4j
@@ -25,13 +28,48 @@ public class BootLoader implements CommandLineRunner {
     private final SkillRepository skillRepository;
     private final TalentRepository talentRepository;
     private final RaceRepository raceRepository;
+    private final ProfessionRepository professionRepository;
 
     @Override
     public void run(String... args) throws Exception {
         loadSkills();
         loadTalents();
         loadRaces();
+        loadProfessions();
 
+    }
+
+    private void loadSkills() throws IOException {
+        List<String> lines = Files.readAllLines(Path.of("src/main/resources/static/skills2.txt"));
+        lines.stream()
+                .map(this::convertToSkill)
+                .forEach(skillRepository::save);
+    }
+
+    private Skill convertToSkill(String line){
+        String[] split = line.split(";");
+        return Skill.builder()
+                .name(split[0])
+                .statNumber(split[1])
+                .type(split[2].equals("podstawowa")? SkillType.BASIC:SkillType.ADVANCED)
+                .build();
+    }
+
+    private void loadTalents() throws IOException {
+        List<String> lines = Files.readAllLines(Path.of("src/main/resources/static/talents.txt"));
+        lines.stream()
+                .map(this::convertToTalent)
+                .forEach(talentRepository::save);
+    }
+
+    private Talent convertToTalent(String line){
+        String[] split = line.split(";");
+        return Talent.builder()
+                .name(split[0])
+                .statNumber(split[1])
+                .test(split[2])
+                .description(split[3])
+                .build();
     }
 
     private void loadRaces() throws IOException {
@@ -52,36 +90,41 @@ public class BootLoader implements CommandLineRunner {
                 .build();
     }
 
-    private void loadSkills() throws IOException {
-        List<String> lines = Files.readAllLines(Path.of("src/main/resources/static/skills2.txt"));
+    private void loadProfessions() throws IOException {
+        List<String> lines = Files.readAllLines(Path.of("src/main/resources/static/professions.txt"));
         lines.stream()
-                .map(this::convertToSkill)
-                .forEach(skillRepository::save);
+                .map(this::convertToProfession)
+                .flatMap(Collection::stream)
+                .forEach(professionRepository::save);
     }
 
-    private void loadTalents() throws IOException {
-        List<String> lines = Files.readAllLines(Path.of("src/main/resources/static/talents.txt"));
-        lines.stream()
-                .map(this::convertToTalent)
-                .forEach(talentRepository::save);
-    }
-
-    private Skill convertToSkill(String line){
+    private List<Profession> convertToProfession(String line) {
         String[] split = line.split(";");
-        return Skill.builder()
-                .name(split[0])
-                .statNumber(split[1])
-                .type(split[2].equals("podstawowa")? SkillType.BASIC:SkillType.ADVANCED)
+        Profession male = Profession.builder()
+                .career(split[0])
+                .name(split[1].split("/")[0])
+                .path(split[2].split("/")[0])
+                .availableForRaces(List.of(split[3].split(",")))
+                .skillNames(List.of(split[4].split("/")))
+                .talentNames(List.of(split[5].split("/")))
+                .items(List.of(split[6].split(",")))
+                .stats(List.of(split[7].split(",")))
+                .level(split[8])
+                .male(true)
                 .build();
-    }
 
-    private Talent convertToTalent(String line){
-        String[] split = line.split(";");
-        return Talent.builder()
-                .name(split[0])
-                .statNumber(split[1])
-                .test(split[2])
-                .description(split[3])
+        Profession female = Profession.builder()
+                .career(split[0])
+                .name(split[1].split("/")[1])
+                .path(split[2].split("/")[1])
+                .availableForRaces(List.of(split[3].split(",")))
+                .skillNames(List.of(split[4].split("/")))
+                .talentNames(List.of(split[5].split("/")))
+                .items(List.of(split[6].split(",")))
+                .stats(List.of(split[7].split(",")))
+                .level(split[8])
+                .male(false)
                 .build();
+        return List.of(male,female);
     }
 }
