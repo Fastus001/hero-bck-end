@@ -4,11 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import pl.fastus.wfrpg.hero.domain.skill.Skill;
 
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
@@ -24,11 +23,12 @@ public class Race {
 
     private String name;
 
-    @ElementCollection
-    private List<String> skillNames;
+    @ManyToMany
+    private List<Skill> skills = new ArrayList<>();
 
     @ElementCollection
     private List<String> talentNames;
+
     private String freeTalents;
 
     @ElementCollection

@@ -19,6 +19,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -36,7 +37,6 @@ public class BootLoader implements CommandLineRunner {
         loadTalents();
         loadRaces();
         loadProfessions();
-
     }
 
     private void loadSkills() throws IOException {
@@ -80,13 +80,18 @@ public class BootLoader implements CommandLineRunner {
     }
 
     private Race convertToRace(String line) {
-        String[] split = line.split(";");
+        String[] raceSplit = line.split(";");
+        List<Skill> skills = List.of(raceSplit[1].split(":"))
+                .stream()
+                .map(skillRepository::findByName)
+                .collect(Collectors.toList());
+
         return Race.builder()
-                .name(split[0])
-                .skillNames(List.of(split[1].split(":")))
-                .talentNames(List.of(split[2].split(":")))
-                .freeTalents(split[3])
-                .stats(List.of(split[4].split(",")))
+                .name(raceSplit[0])
+                .skills(skills)
+                .talentNames(List.of(raceSplit[2].split(":")))
+                .freeTalents(raceSplit[3])
+                .stats(List.of(raceSplit[4].split(",")))
                 .build();
     }
 
