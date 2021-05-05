@@ -4,11 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import pl.fastus.wfrpg.hero.domain.skill.Skill;
+import pl.fastus.wfrpg.hero.domain.talent.Talent;
 
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.List;
 
 /**
@@ -30,11 +29,11 @@ public class Profession {
     private String path;
     private Boolean male;
 
-    @ElementCollection
-    private List<String> skillNames;
+    @ManyToMany
+    private List<Skill> skills;
 
-    @ElementCollection
-    private List<String> talentNames;
+    @ManyToMany
+    private List<Talent> talents;
 
     @ElementCollection
     private List<String> availableForRaces;

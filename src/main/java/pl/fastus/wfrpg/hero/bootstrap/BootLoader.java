@@ -110,13 +110,21 @@ public class BootLoader implements CommandLineRunner {
 
     private List<Profession> convertToProfession(String line) {
         String[] split = line.split(";");
+        List<Skill> skillList = List.of(split[4].split("/")).stream()
+                .map(skillRepository::findByName)
+                .collect(Collectors.toList());
+
+        List<Talent> talentList = List.of(split[5].split("/")).stream()
+                .map(talentRepository::findByName)
+                .collect(Collectors.toList());
+
         Profession male = Profession.builder()
                 .career(split[0])
                 .name(split[1].split("/")[0])
                 .path(split[2].split("/")[0])
                 .availableForRaces(List.of(split[3].split(",")))
-                .skillNames(List.of(split[4].split("/")))
-                .talentNames(List.of(split[5].split("/")))
+                .skills(skillList)
+                .talents(talentList)
                 .items(List.of(split[6].split(",")))
                 .stats(List.of(split[7].split(",")))
                 .level(split[8])
@@ -128,8 +136,8 @@ public class BootLoader implements CommandLineRunner {
                 .name(split[1].split("/")[1])
                 .path(split[2].split("/")[1])
                 .availableForRaces(List.of(split[3].split(",")))
-                .skillNames(List.of(split[4].split("/")))
-                .talentNames(List.of(split[5].split("/")))
+                .skills(skillList)
+                .talents(talentList)
                 .items(List.of(split[6].split(",")))
                 .stats(List.of(split[7].split(",")))
                 .level(split[8])
