@@ -50,7 +50,15 @@ class ProfessionControllerTest {
     }
 
     @Test
-    void getProfessionsByLvl() {
+    void getProfessionsByLvl() throws Exception {
+        BDDMockito.given(service.getByLvl(3)).willReturn(List.of(professions.get(2),professions.get(3)));
+
+        mockMvc.perform(get("/professions/3"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].name", is("Profession3")))
+                .andExpect(jsonPath("$[0].level", is("3")))
+                .andExpect(jsonPath("$[1].name", is("Profession4")));
+
     }
 
     private List<Profession> getProfessionList() {
