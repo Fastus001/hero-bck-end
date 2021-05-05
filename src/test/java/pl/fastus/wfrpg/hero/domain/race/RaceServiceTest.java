@@ -7,6 +7,8 @@ import org.mockito.BDDMockito;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import pl.fastus.wfrpg.hero.domain.skill.Skill;
+import pl.fastus.wfrpg.hero.domain.talent.Talent;
 
 import java.util.List;
 
@@ -26,12 +28,7 @@ class RaceServiceTest {
 
     @BeforeEach
     void setUp() {
-        races = List.of(
-                Race.builder().id(1L).name("Humans").skillNames(List.of("Skill1", "Skill2", "Skill3"))
-                        .talentNames(List.of("Talent1","Talent2")).freeTalents("2").build(),
-                Race.builder().id(1L).name("Dwarfs").skillNames(List.of("Skill1", "Skill2"))
-                        .talentNames(List.of("Talent1","Talent2", "Talent3")).freeTalents("4").build()
-        );
+        races = getRaces();
     }
 
     @Test
@@ -42,6 +39,31 @@ class RaceServiceTest {
 
         assertNotNull(allRaces);
         assertEquals(2, allRaces.size());
-        assertEquals(3, allRaces.get(0).getSkillNames().size());
+        assertEquals(3, allRaces.get(0).getSkills().size());
+    }
+
+    private List<Race> getRaces() {
+        return List.of(
+                Race.builder().id(1L).name("Humans")
+                        .skills(List.of(
+                                Skill.builder().name("Skill1").build(),
+                                Skill.builder().name("Skill2").build(),
+                                Skill.builder().name("Skill3").build()))
+                        .talents(List.of(
+                                Talent.builder().name("Talent1").build(),
+                                Talent.builder().name("Talent2").build()
+                                )).freeTalents("2").build(),
+                Race.builder().id(1L).name("Dwarfs")
+                        .skills(List.of(
+                                Skill.builder().name("Skill1").build(),
+                                Skill.builder().name("Skill2").build()
+                        ))
+                        .talents(List.of(
+                                Talent.builder().name("Talent1").build(),
+                                Talent.builder().name("Talent2").build(),
+                                Talent.builder().name("Talent3").build()
+                        ))
+                        .freeTalents("4").build()
+        );
     }
 }
