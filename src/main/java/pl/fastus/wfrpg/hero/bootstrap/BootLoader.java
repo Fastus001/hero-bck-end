@@ -86,10 +86,15 @@ public class BootLoader implements CommandLineRunner {
                 .map(skillRepository::findByName)
                 .collect(Collectors.toList());
 
+        List<Talent> talents = List.of(raceSplit[2].split(":"))
+                .stream()
+                .map(talentRepository::findByName)
+                .collect(Collectors.toList());
+
         return Race.builder()
                 .name(raceSplit[0])
                 .skills(skills)
-                .talentNames(List.of(raceSplit[2].split(":")))
+                .talents(talents)
                 .freeTalents(raceSplit[3])
                 .stats(List.of(raceSplit[4].split(",")))
                 .build();

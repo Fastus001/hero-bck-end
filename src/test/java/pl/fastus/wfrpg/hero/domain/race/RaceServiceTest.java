@@ -8,6 +8,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import pl.fastus.wfrpg.hero.domain.skill.Skill;
+import pl.fastus.wfrpg.hero.domain.talent.Talent;
 
 import java.util.List;
 
@@ -48,13 +49,21 @@ class RaceServiceTest {
                                 Skill.builder().name("Skill1").build(),
                                 Skill.builder().name("Skill2").build(),
                                 Skill.builder().name("Skill3").build()))
-                        .talentNames(List.of("Talent1", "Talent2")).freeTalents("2").build(),
+                        .talents(List.of(
+                                Talent.builder().name("Talent1").build(),
+                                Talent.builder().name("Talent2").build()
+                                )).freeTalents("2").build(),
                 Race.builder().id(1L).name("Dwarfs")
                         .skills(List.of(
                                 Skill.builder().name("Skill1").build(),
                                 Skill.builder().name("Skill2").build()
                         ))
-                        .talentNames(List.of("Talent1", "Talent2", "Talent3")).freeTalents("4").build()
+                        .talents(List.of(
+                                Talent.builder().name("Talent1").build(),
+                                Talent.builder().name("Talent2").build(),
+                                Talent.builder().name("Talent3").build()
+                        ))
+                        .freeTalents("4").build()
         );
     }
 }

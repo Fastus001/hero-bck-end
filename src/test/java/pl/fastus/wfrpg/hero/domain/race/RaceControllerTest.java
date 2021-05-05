@@ -9,6 +9,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import pl.fastus.wfrpg.hero.domain.skill.Skill;
+import pl.fastus.wfrpg.hero.domain.talent.Talent;
 
 import java.util.List;
 
@@ -56,14 +57,21 @@ class RaceControllerTest {
                                 Skill.builder().name("Skill1").build(),
                                 Skill.builder().name("Skill2").build(),
                                 Skill.builder().name("Skill3").build()))
-                        .talentNames(List.of("Talent1", "Talent2")).freeTalents("2")
+                        .talents(List.of(
+                                Talent.builder().name("Talent1").build(),
+                                Talent.builder().name("Talent2").build()
+                        )).freeTalents("2")
                         .stats(List.of("20", "30", "25")).build(),
                 Race.builder().id(1L).name("Dwarfs")
                         .skills(List.of(
                                 Skill.builder().name("Skill1").build(),
                                 Skill.builder().name("Skill2").build(),
                                 Skill.builder().name("Skill3").build()))
-                        .talentNames(List.of("Talent1", "Talent2", "Talent3")).freeTalents("4").build()
+                        .talents(List.of(
+                                Talent.builder().name("Talent1").build(),
+                                Talent.builder().name("Talent2").build(),
+                                Talent.builder().name("Talent3").build()
+                        )).freeTalents("4").build()
         );
     }
 }

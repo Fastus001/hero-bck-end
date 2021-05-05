@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import pl.fastus.wfrpg.hero.domain.skill.Skill;
+import pl.fastus.wfrpg.hero.domain.talent.Talent;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -26,8 +27,8 @@ public class Race {
     @ManyToMany
     private List<Skill> skills = new ArrayList<>();
 
-    @ElementCollection
-    private List<String> talentNames;
+    @ManyToMany
+    private List<Talent> talents = new ArrayList<>();
 
     private String freeTalents;
 
