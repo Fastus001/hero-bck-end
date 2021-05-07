@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * Created by Tom - 03.05.2021
  */
-@RequestMapping("/professions")
+@RequestMapping("/api/professions")
 @AllArgsConstructor
 @RestController
 @Validated

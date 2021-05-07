@@ -40,8 +40,8 @@ class SkillControllerTest {
                 .build();
 
         skills = List.of(
-                new Skill("A", "0", SkillType.BASIC),
-                new Skill("B", "1", SkillType.ADVANCED)
+                new Skill("A", "0", SkillType.PODSTAWOWA),
+                new Skill("B", "1", SkillType.ZAAWANSOWANA)
         );
     }
 
@@ -49,14 +49,14 @@ class SkillControllerTest {
     void getAllSkills() throws Exception {
         given(service.getAllSkills()).willReturn(skills);
 
-        mockMvc.perform(get("/skills"))
+        mockMvc.perform(get("/api/skills"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].name", is("A")))
                 .andExpect(jsonPath("$[0].statNumber", is("0")))
-                .andExpect(jsonPath("$[0].type", is("BASIC")))
+                .andExpect(jsonPath("$[0].type", is("PODSTAWOWA")))
                 .andExpect(jsonPath("$[1].name", is("B")))
                 .andExpect(jsonPath("$[1].statNumber", is("1")))
-                .andExpect(jsonPath("$[1].type", is("ADVANCED")));
+                .andExpect(jsonPath("$[1].type", is("ZAAWANSOWANA")));
 
         verify(service, times(1)).getAllSkills();
     }
@@ -65,11 +65,11 @@ class SkillControllerTest {
     void getBySkillName() throws Exception {
         given(service.findSkillByName(any())).willReturn(skills.get(0));
 
-        mockMvc.perform(get("/skills/A"))
+        mockMvc.perform(get("/api/skills/A"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name", is("A")))
                 .andExpect(jsonPath("$.statNumber", is("0")))
-                .andExpect(jsonPath("$.type", is("BASIC")));
+                .andExpect(jsonPath("$.type", is("PODSTAWOWA")));
 
         verify(service, times(1)).findSkillByName(any());
     }

@@ -51,7 +51,7 @@ public class BootLoader implements CommandLineRunner {
         return Skill.builder()
                 .name(split[0])
                 .statNumber(split[1])
-                .type(split[2].equals("podstawowa")? SkillType.BASIC:SkillType.ADVANCED)
+                .type(split[2].equals("podstawowa")? SkillType.PODSTAWOWA:SkillType.ZAAWANSOWANA)
                 .build();
     }
 

@@ -41,7 +41,7 @@ class ProfessionControllerTest {
     void getAllProfessions() throws Exception {
         BDDMockito.given(service.getProfessions()).willReturn(professions);
 
-        mockMvc.perform(get("/professions"))
+        mockMvc.perform(get("/api/professions"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].name", is("Profession1")))
                 .andExpect(jsonPath("$[0].level", is("1")))
@@ -53,7 +53,7 @@ class ProfessionControllerTest {
     void getProfessionsByLvl() throws Exception {
         BDDMockito.given(service.getByLvl(3)).willReturn(List.of(professions.get(2),professions.get(3)));
 
-        mockMvc.perform(get("/professions/3"))
+        mockMvc.perform(get("/api/professions/3"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].name", is("Profession3")))
                 .andExpect(jsonPath("$[0].level", is("3")))

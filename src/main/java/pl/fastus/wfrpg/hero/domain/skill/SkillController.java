@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping("/skills")
+@RequestMapping("/api/skills")
 @RequiredArgsConstructor
 @RestController
 public class SkillController {

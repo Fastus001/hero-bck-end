@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RequestMapping("/talents")
+@RequestMapping("/api/talents")
 @RequiredArgsConstructor
 @RestController
 public class TalentController {

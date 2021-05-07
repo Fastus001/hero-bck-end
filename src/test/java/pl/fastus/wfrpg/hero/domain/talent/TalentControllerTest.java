@@ -42,7 +42,7 @@ class TalentControllerTest {
     void getAllTalents() throws Exception {
         given(talentService.getAllTalents()).willReturn(talentsToReturn);
 
-        mockMvc.perform(get("/talents"))
+        mockMvc.perform(get("/api/talents"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].id", is(1)))
                 .andExpect(jsonPath("$[0].name", is("Talent1")))

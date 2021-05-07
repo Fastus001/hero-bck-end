@@ -1,11 +1,6 @@
 package pl.fastus.wfrpg.hero.enums;
 
 public enum SkillType {
-    BASIC("Podstawowa"), ADVANCED("Zaawansowana");
+    PODSTAWOWA, ZAAWANSOWANA;
 
-    private final String name;
-
-    SkillType(String name) {
-        this.name = name;
-    }
 }

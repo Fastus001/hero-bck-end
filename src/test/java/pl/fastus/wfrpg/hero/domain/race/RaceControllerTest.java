@@ -43,7 +43,7 @@ class RaceControllerTest {
     void getAllRaces() throws Exception {
         given(raceService.getAllRaces()).willReturn(races);
 
-        mockMvc.perform(get("/races"))
+        mockMvc.perform(get("/api/races"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].name", is("Humans")))
                 .andExpect(jsonPath("$[0].stats[0]", is("20")))
