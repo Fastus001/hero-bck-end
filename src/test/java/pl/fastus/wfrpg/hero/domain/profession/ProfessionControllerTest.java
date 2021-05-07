@@ -62,9 +62,10 @@ class ProfessionControllerTest {
 
     @Test
     void getProfessionsByLvlAndSex() throws Exception {
-        BDDMockito.given(service.getByLvlAndSex("3", Boolean.FALSE)).willReturn(List.of(professions.get(3)));
+        BDDMockito.given(service.getByLvlAndSex("3", Boolean.FALSE,"Halfling"))
+                .willReturn(List.of(professions.get(3)));
 
-        mockMvc.perform(get("/api/professions/3/false"))
+        mockMvc.perform(get("/api/professions/3/false/Halfling"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].name", is("Profession4")))
                 .andExpect(jsonPath("$[0].level", is("3")))
@@ -80,6 +81,8 @@ class ProfessionControllerTest {
                 Profession.builder().id(3L).name("Profession3").availableForRaces(List.of("Halfling", "Dwarf", "Elf"))
                         .male(true).level("3").build(),
                 Profession.builder().id(4L).name("Profession4").availableForRaces(List.of("Halfling", "Dwarf", "Elf"))
+                        .male(false).level("3").build(),
+                Profession.builder().id(5L).name("Profession5").availableForRaces(List.of( "Dwarf", "Elf"))
                         .male(false).level("3").build()
         );
     }

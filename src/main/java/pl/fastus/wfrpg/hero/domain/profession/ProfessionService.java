@@ -23,7 +23,7 @@ public class ProfessionService {
         return repository.findAllByLevel(lvl);
     }
 
-    public List<Profession> getByLvlAndSex(String lvl, Boolean sex) {
-        return repository.findAllByLevelAndMale(lvl, sex);
+    public List<Profession> getByLvlAndSex(String lvl, Boolean sex, String race) {
+        return repository.findAllByLevelAndMaleAndAvailableForRacesLike(lvl, sex, race);
     }
 }

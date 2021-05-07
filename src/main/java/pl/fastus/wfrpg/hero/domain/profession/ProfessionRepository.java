@@ -11,5 +11,5 @@ public interface ProfessionRepository extends JpaRepository<Profession, Long> {
 
     List<Profession> findAllByLevel(Integer lvl);
 
-    List<Profession> findAllByLevelAndMale(String lvl, Boolean male);
+    List<Profession> findAllByLevelAndMaleAndAvailableForRacesLike(String lvl, Boolean male, String name);
 }

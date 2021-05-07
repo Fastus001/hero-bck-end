@@ -37,7 +37,7 @@ class ProfessionServiceTest {
         List<Profession> professions = service.getProfessions();
 
         assertNotNull(professions);
-        assertEquals(4, professions.size());
+        assertEquals(5, professions.size());
         assertEquals(2, professions.get(0).getAvailableForRaces().size());
     }
 
@@ -54,10 +54,10 @@ class ProfessionServiceTest {
 
     @Test
     void getByLvlAndSex() {
-        given(repository.findAllByLevelAndMale(any(), any()))
+        given(repository.findAllByLevelAndMaleAndAvailableForRacesLike(any(), any(), any()))
                 .willReturn(List.of(professionsToReturn.get(3)));
 
-        List<Profession> byLvlAndSex = service.getByLvlAndSex("3", Boolean.FALSE);
+        List<Profession> byLvlAndSex = service.getByLvlAndSex("3", Boolean.FALSE,"Halfling" );
 
         assertNotNull(byLvlAndSex);
         assertEquals(1, byLvlAndSex.size());
@@ -73,6 +73,8 @@ class ProfessionServiceTest {
                 Profession.builder().id(3L).name("Profession3").availableForRaces(List.of("Halfling", "Dwarf", "Elf"))
                         .male(true).level("3").build(),
                 Profession.builder().id(4L).name("Profession4").availableForRaces(List.of("Halfling", "Dwarf", "Elf"))
+                        .male(false).level("3").build(),
+                Profession.builder().id(5L).name("Profession5").availableForRaces(List.of("Dwarf", "Elf"))
                         .male(false).level("3").build()
         );
     }

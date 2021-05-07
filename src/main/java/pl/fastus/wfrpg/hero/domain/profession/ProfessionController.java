@@ -3,16 +3,14 @@ package pl.fastus.wfrpg.hero.domain.profession;
 import lombok.AllArgsConstructor;
 import org.hibernate.validator.constraints.Range;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 /**
  * Created by Tom - 03.05.2021
  */
+@CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.GET})
 @RequestMapping("/api/professions")
 @AllArgsConstructor
 @RestController
@@ -31,11 +29,13 @@ public class ProfessionController {
         return professionService.getByLvl(lvl);
     }
 
-    @GetMapping("/{lvl}/{sex}")
+    @GetMapping("/{lvl}/{sex}/{race}")
     public List<Profession> getProfessionsByLvlAndSex(@PathVariable @Range(min = 1,max = 4) Integer lvl,
-                                                      @PathVariable boolean sex){
-        return professionService.getByLvlAndSex(String.valueOf(lvl), sex);
+                                                      @PathVariable boolean sex, @PathVariable String race){
+        return professionService.getByLvlAndSex(String.valueOf(lvl), sex, race);
     }
 
 
 }
+
+
