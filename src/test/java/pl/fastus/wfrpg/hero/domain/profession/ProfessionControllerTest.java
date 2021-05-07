@@ -58,19 +58,29 @@ class ProfessionControllerTest {
                 .andExpect(jsonPath("$[0].name", is("Profession3")))
                 .andExpect(jsonPath("$[0].level", is("3")))
                 .andExpect(jsonPath("$[1].name", is("Profession4")));
+    }
 
+    @Test
+    void getProfessionsByLvlAndSex() throws Exception {
+        BDDMockito.given(service.getByLvlAndSex("3", Boolean.FALSE)).willReturn(List.of(professions.get(3)));
+
+        mockMvc.perform(get("/api/professions/3/false"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].name", is("Profession4")))
+                .andExpect(jsonPath("$[0].level", is("3")))
+                .andExpect(jsonPath("$[0].male", is(false)));
     }
 
     private List<Profession> getProfessionList() {
         return List.of(
                 Profession.builder().id(1L).name("Profession1").availableForRaces(List.of("Human", "Dwarf")).level("1")
-                        .build(),
+                        .male(true).build(),
                 Profession.builder().id(2L).name("Profession2").availableForRaces(List.of("Human", "Dwarf", "Elf"))
-                        .level("2").build(),
+                        .male(true).level("2").build(),
                 Profession.builder().id(3L).name("Profession3").availableForRaces(List.of("Halfling", "Dwarf", "Elf"))
-                        .level("3").build(),
+                        .male(true).level("3").build(),
                 Profession.builder().id(4L).name("Profession4").availableForRaces(List.of("Halfling", "Dwarf", "Elf"))
-                        .level("3").build()
+                        .male(false).level("3").build()
         );
     }
 }

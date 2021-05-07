@@ -31,5 +31,11 @@ public class ProfessionController {
         return professionService.getByLvl(lvl);
     }
 
+    @GetMapping("/{lvl}/{sex}")
+    public List<Profession> getProfessionsByLvlAndSex(@PathVariable @Range(min = 1,max = 4) Integer lvl,
+                                                      @PathVariable boolean sex){
+        return professionService.getByLvlAndSex(String.valueOf(lvl), sex);
+    }
+
 
 }

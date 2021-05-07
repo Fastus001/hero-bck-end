@@ -22,4 +22,8 @@ public class ProfessionService {
     public List<Profession> getByLvl(Integer lvl) {
         return repository.findAllByLevel(lvl);
     }
+
+    public List<Profession> getByLvlAndSex(String lvl, Boolean sex) {
+        return repository.findAllByLevelAndMale(lvl, sex);
+    }
 }

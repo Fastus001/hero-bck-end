@@ -52,16 +52,28 @@ class ProfessionServiceTest {
         assertEquals(2, professionByLevel.size());
     }
 
+    @Test
+    void getByLvlAndSex() {
+        given(repository.findAllByLevelAndMale(any(), any()))
+                .willReturn(List.of(professionsToReturn.get(3)));
+
+        List<Profession> byLvlAndSex = service.getByLvlAndSex("3", Boolean.FALSE);
+
+        assertNotNull(byLvlAndSex);
+        assertEquals(1, byLvlAndSex.size());
+        assertEquals("Profession4", byLvlAndSex.get(0).getName());
+    }
+
     private List<Profession> getProfessionList() {
         return List.of(
                 Profession.builder().id(1L).name("Profession1").availableForRaces(List.of("Human", "Dwarf")).level("1")
-                        .build(),
+                        .male(true).build(),
                 Profession.builder().id(2L).name("Profession2").availableForRaces(List.of("Human", "Dwarf", "Elf"))
-                        .level("2").build(),
+                        .male(true).level("2").build(),
                 Profession.builder().id(3L).name("Profession3").availableForRaces(List.of("Halfling", "Dwarf", "Elf"))
-                        .level("3").build(),
+                        .male(true).level("3").build(),
                 Profession.builder().id(4L).name("Profession4").availableForRaces(List.of("Halfling", "Dwarf", "Elf"))
-                        .level("3").build()
+                        .male(false).level("3").build()
         );
     }
 }

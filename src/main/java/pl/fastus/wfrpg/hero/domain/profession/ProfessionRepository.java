@@ -10,4 +10,6 @@ import java.util.List;
 public interface ProfessionRepository extends JpaRepository<Profession, Long> {
 
     List<Profession> findAllByLevel(Integer lvl);
+
+    List<Profession> findAllByLevelAndMale(String lvl, Boolean male);
 }
