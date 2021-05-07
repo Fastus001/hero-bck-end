@@ -3,7 +3,6 @@ package pl.fastus.wfrpg.hero.domain.race;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.BDDMockito;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -14,6 +13,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.BDDMockito.given;
 
 @ExtendWith(MockitoExtension.class)
 class RaceServiceTest {
@@ -33,13 +33,26 @@ class RaceServiceTest {
 
     @Test
     void getAllRaces() {
-        BDDMockito.given(repository.findAll()).willReturn(races);
+        given(repository.findAll()).willReturn(races);
 
         List<Race> allRaces = service.getAllRaces();
 
         assertNotNull(allRaces);
         assertEquals(2, allRaces.size());
         assertEquals(3, allRaces.get(0).getSkills().size());
+    }
+
+    @Test
+    void getAllRacesNames() {
+        List<String> names = List.of("Ludzie", "Krasonludy", "Niziołki");
+
+        given(repository.getAllRaceName()).willReturn(names);
+
+        List<String> racesNames = service.getAllRacesNames();
+
+        assertNotNull(racesNames);
+        assertEquals(3, racesNames.size());
+        assertEquals("Niziołki", racesNames.get(2));
     }
 
     private List<Race> getRaces() {

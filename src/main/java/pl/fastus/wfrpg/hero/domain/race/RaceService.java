@@ -14,4 +14,8 @@ public class RaceService {
     public List<Race> getAllRaces(){
         return repository.findAll();
     }
+
+    public List<String> getAllRacesNames() {
+        return repository.getAllRaceName();
+    }
 }

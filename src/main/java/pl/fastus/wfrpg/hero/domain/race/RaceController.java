@@ -17,4 +17,9 @@ public class RaceController {
     public List<Race> getAllRaces(){
         return service.getAllRaces();
     }
+
+    @GetMapping("/names")
+    public List<String> getAllRacesNames(){
+        return service.getAllRacesNames();
+    }
 }

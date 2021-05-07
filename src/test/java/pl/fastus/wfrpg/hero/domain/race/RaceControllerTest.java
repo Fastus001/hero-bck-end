@@ -50,6 +50,19 @@ class RaceControllerTest {
                 .andExpect(jsonPath("$[1].name", is("Dwarfs")));
     }
 
+    @Test
+    void getAllRacesNames() throws Exception {
+        List<String> names = List.of("Ludzie", "Krasonludy", "Niziołki");
+
+        given(raceService.getAllRacesNames()).willReturn(names);
+
+        mockMvc.perform(get("/api/races/names"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0]", is("Ludzie")))
+                .andExpect(jsonPath("$[1]", is("Krasonludy")))
+                .andExpect(jsonPath("$[2]", is("Niziołki")));
+    }
+
     private List<Race> getRaces() {
         return List.of(
                 Race.builder().id(1L).name("Humans")
