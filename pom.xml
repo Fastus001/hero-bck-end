@@ -14,7 +14,7 @@
     <name>hero</name>
     <description>Backend for the hero wfrpg creator</description>
     <properties>
-        <java.version>11</java.version>
+        <java.version>17</java.version>
         <JUinit.version>5.7.1</JUinit.version>
     </properties>
     <dependencies>
