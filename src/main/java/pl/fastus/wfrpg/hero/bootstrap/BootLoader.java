@@ -20,6 +20,7 @@ import java.nio.file.Path;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -81,13 +82,11 @@ public class BootLoader implements CommandLineRunner {
 
     private Race convertToRace(String line) {
         String[] raceSplit = line.split(";");
-        List<Skill> skills = List.of(raceSplit[1].split(":"))
-                .stream()
+        List<Skill> skills = Stream.of(raceSplit[1].split(":"))
                 .map(skillRepository::findByName)
                 .collect(Collectors.toList());
 
-        List<Talent> talents = List.of(raceSplit[2].split(":"))
-                .stream()
+        List<Talent> talents = Stream.of(raceSplit[2].split(":"))
                 .map(talentRepository::findByName)
                 .collect(Collectors.toList());
 
@@ -110,11 +109,11 @@ public class BootLoader implements CommandLineRunner {
 
     private List<Profession> convertToProfession(String line) {
         String[] split = line.split(";");
-        List<Skill> skillList = List.of(split[4].split("/")).stream()
+        List<Skill> skillList = Stream.of(split[4].split("/"))
                 .map(skillRepository::findByName)
                 .collect(Collectors.toList());
 
-        List<Talent> talentList = List.of(split[5].split("/")).stream()
+        List<Talent> talentList = Stream.of(split[5].split("/"))
                 .map(talentRepository::findByName)
                 .collect(Collectors.toList());
 
